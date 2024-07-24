@@ -20,8 +20,8 @@ function Items() {
   };
 
   if (loading) {
-    return <div>
-      <img src="./loading.gif" alt=""  className="xl:w-full"/>
+    return <div className="w-full h-screen justify-center m-auto flex flex-col">
+      <img src="./loading.gif" alt=""  className=" w-96 h-96 object-cover xl:w-full"/>
     </div>;
   }
 
