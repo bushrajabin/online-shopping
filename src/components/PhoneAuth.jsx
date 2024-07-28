@@ -137,9 +137,6 @@ const PhoneAuth = () => {
       
 
         {error && <p className="text-red-500  my-3 text-xs ">{error}</p>}
-
-
-
         {/* Add input for OTP and a button to verify */}
 
         {
