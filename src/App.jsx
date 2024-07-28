@@ -1,17 +1,21 @@
 import { useState } from "react";
 import "./App.css";
-import Nav from "./components/NavBar/Nav";
-import Items from "./components/product/Items";
-import Hero from "./components/Hero/Hero";
+import Home from "./components/pages/Home";
+import PhoneAuth from "./components/PhoneAuth";
+import Otp from "./components/Otp";
+import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
 function App() {
-  return(
+  return (
     <>
-    <Nav/>
-    <Hero/>
-       <Items />
-
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/PhoneAuth" element={<PhoneAuth />} />
+          <Route path="/otp" element={<Otp/>}/>
+        </Routes>
+      </BrowserRouter>
     </>
-
   );
 }
 export default App;
+
