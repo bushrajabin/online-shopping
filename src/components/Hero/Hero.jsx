@@ -3,7 +3,7 @@ import { HeroData } from "../../common/HeroData";
 
 function Hero() {
   return (
-    <div className="xl:flex xl:flex-row xl:justify-evenly  xl:border-b-2 xl:cursor-pointer xl:fixed xl:w-full xl:bg-white xl:z-0 xl:top-26  ">
+    <div className=" flex flex-row flex-wrap gap-2 pt-24  xl:flex xl:flex-row xl:justify-evenly  xl:border-b-2 xl:cursor-pointer xl:fixed xl:w-full xl:bg-white xl:z-0 xl:top-26  ">
       {HeroData.map((data, index, arr) => {
         return (
           <div key={index}  className=" xl:m-2 "  >

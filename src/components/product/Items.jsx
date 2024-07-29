@@ -39,30 +39,32 @@ function Items() {
 
   return (
     <>
-      <div className="flex flex-col items-center xl:flex xl:flex-col xl:justify-center xl:items-center xl:mt-16 ">
-        <div className="bg-violet-100 w-full flex flex-col justify-center items-center xl:bg-slate-50 xl:flex xl:flex-row xl:flex-wrap xl:w-full xl:justify-center xl:items-center">
+      <div className=" flex flex-col items-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:justify-center  ">
+        <div className="   flex flex-row flex-wrap justify-center text-center mt-28 sm:flex sm:flex-row sm:flex-wrap sm:mt-28 xl:flex xl:flex-row  xl:mt-10 ">
           {slice.map((data, index) => {
             const { title, image, price, category, name } = data;
             return (
               <div
                 key={index}
-                className="shadow-xl rounded-lg w-80 m-2 flex flex-col items-center bg-white sm:p-3 sm:m-3 xl:bg-white xl:p-4 xl:m-2 xl:flex xl:flex-col "
+                className=" bg-white m-2 flex flex-col items-center w-40 p-2 rounded-sm shadow-md sm:w-40 md:w-44 lg:w-64 xl:bg-red-900 xl:w-80   "
               >
                 <img
                   src={image}
                   alt=""
-                  className="w-56 h-56 p-2 object-contain xl:w-64 xl:h-64 xl:object-contain"
+                  className=" w-20 h-20 object-contain m-2 sm:w-20 sm:h-20 sm:object-contain  md:w-20 md:h-20 md:object-contain lg:w-52 lg:h-32 lg:object-contain xl:w-72 xl:h-60 "
                 />
-                <h1 className="font-bold text-lg p-1 xl:font-bold xl:underline xl:text-lg xl:font-serif xl:p-3">
+                <h1 className="font-bold text-sm p-1  md:text-sm lg:text-xl xl:font-bold xl:underline xl:text-lg xl:font-serif xl:p-3 ">
                   {category}
                   {name}
                 </h1>
-                <h2 className="font-sans text-sm xl:font-sans xl:pl-3">
+                <h2 className="font-sans text-sm lg:text-lg xl:font-sans xl:pl-3">
                   {title}
                 </h2>
-                <div className="flex flex-row items-center justify-evenly w-full p-2 xl:flex xl:flex-row xl:items-center xl:justify-between xl:p-3">
-                  <h3 className="font-bold xl:font-bold">Price: {price}</h3>
-                  <button className="w-20 rounded-md p-1 font-semibold border-blue-900 border-2 xl:border-2 xl:p-2 xl:border-blue-400 xl:w-20 xl:rounded-lg xl:font-semibold">
+                <div className="flex flex-row items-center w-full justify-between p-2 xl:flex xl:flex-row xl:items-center xl:justify-between xl:p-3 ">
+                  <h3 className="font-bold text-xs xl:font-bold md:text-xs md:font-bold lg:text-xl">
+                    Price: {price}
+                  </h3>
+                  <button className="w-12 text-xs rounded-md p-1 font-semibold border-blue-900 border-2 md:p-2 md:font-bold md:w-10 md:text-xs lg:text-lg lg:w-20 xl:border-2 xl:p-2 xl:border-blue-400  xl:rounded-lg xl:font-semibold  ">
                     Add
                   </button>
                 </div>
