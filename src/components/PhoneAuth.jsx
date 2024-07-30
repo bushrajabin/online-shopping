@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../firebase/Firebase"; // Ensure this is correctly set up
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const PhoneAuth = () => {
   const navigate = useNavigate();
+  const [isCodeSent, setIsCodeSent] = useState(false);
   const [mynumber, setMynumber] = useState("+91");
   const [otp, setOtp] = useState(""); // State to handle OTP input
   const [error, setError] = useState("");
-  const [isCodeSent, setIsCodeSent] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState(null);
 
   useEffect(() => {
@@ -34,18 +35,21 @@ const PhoneAuth = () => {
   const sendOTP = async () => {
     // Check if the phone number field is empty
     if (!mynumber || mynumber.length < 10) {
-      setError("Please enter a valid phone number.");
+      toast.error("Please enter a valid phone number.");
       return;
     }
 
     try {
-      const result = await signInWithPhoneNumber(auth, mynumber, window.recaptchaVerifier);
-      console.log("OTP sent result:", result);
+      const result = await signInWithPhoneNumber(
+        auth,
+        mynumber,
+        window.recaptchaVerifier
+      );
+      toast.success("OTP send on your valid phone Number!")
       setConfirmationResult(result); // Store confirmation result for later use
       setIsCodeSent(true);
       setError(""); // Clear any previous errors
     } catch (err) {
-      console.error("Error sending OTP:", err);
       setError("Failed to send OTP. Please try again.");
     }
   };
@@ -53,25 +57,25 @@ const PhoneAuth = () => {
   // This is for verify otp
   const verifyOTP = async () => {
     if (!confirmationResult) {
-      setError("OTP not sent. Please request a new OTP.");
+      toast.error("OTP not sent. Please request a new OTP.");
       return;
     }
 
     try {
       const result = await confirmationResult.confirm(otp);
-      console.log("User signed in successfully:", result.user);
-      navigate('/'); // Navigate to another page or update the UI as necessary
+      toast.success("congratulations!!")
+      navigate("/"); // Navigate to another page or update the UI as necessary
     } catch (error) {
       console.error("Error during OTP verification:", error);
-      setError("Invalid OTP. Please try again.");
+      toast.error("Invalid OTP. Please try again.");
     }
   };
 
   return (
-    <div className="flex flex-col items-center h-screen justify-center bg-red-200 p-4">
+    <div className="flex flex-col items-center h-screen justify-center ">
       <div className="bg-white p-5 flex flex-col gap-2 items-center rounded-lg shadow-lg">
         {error && <p className="text-red-500 my-3 text-xs">{error}</p>}
-        
+
         {isCodeSent ? (
           <>
             <h1>OTP</h1>
@@ -80,8 +84,9 @@ const PhoneAuth = () => {
               placeholder="Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              className="bg-yellow-600 p-2 outline-none xl:bg-red-800 xl:p-2 xl:font-mono w-full rounded-md border border-gray-300 mt-3"
+              className="bg-transparent p-2 outline-none xl:bg-transparent xl:p-2 xl:font-mono w-full rounded-md border border-gray-300 mt-3"
             />
+
             <button
               onClick={verifyOTP}
               className="bg-zinc-200 p-2 w-32 rounded-sm mt-3"
@@ -92,14 +97,16 @@ const PhoneAuth = () => {
         ) : (
           <>
             <h1 className="text-lg font-bold mb-4">Login with Phone Number</h1>
-            <div id="recaptcha-container" className="id"></div>
             <input
               type="tel"
               placeholder="Enter your phone number"
               value={mynumber}
               onChange={(e) => setMynumber(e.target.value)}
-              className="bg-black-600 p-2 outline-none xl:bg-red-800 xl:p-2 xl:font-mono w-full rounded-md border border-gray-300"
+              className="bg-black-600 p-2 outline-none xl:bg-transparent xl:p-2 xl:font-mono w-full rounded-md border border-gray-300"
             />
+
+            <div id="recaptcha-container" className="id"></div>
+
             <button
               onClick={sendOTP}
               className="bg-zinc-200 p-2 w-32 rounded-sm"
