@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./components/pages/Home";
 import PhoneAuth from "./components/PhoneAuth";
 import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
@@ -14,7 +14,7 @@ function App() {
         </Routes>
       </BrowserRouter>
 
-{/* This is for toastify */}
+      {/* This is for toastify */}
       <ToastContainer
         position="top-left"
         autoClose={3000}

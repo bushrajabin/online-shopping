@@ -4,6 +4,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserProfile from "./UserProfile";
 const PhoneAuth = () => {
   const navigate = useNavigate();
   const [isCodeSent, setIsCodeSent] = useState(false);
@@ -11,6 +12,7 @@ const PhoneAuth = () => {
   const [otp, setOtp] = useState(""); // State to handle OTP input
   const [error, setError] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(null);
+  const [user, setUser] = useState(null); // State to store user information
 
   useEffect(() => {
     window.recaptchaVerifier = new RecaptchaVerifier(
@@ -45,12 +47,13 @@ const PhoneAuth = () => {
         mynumber,
         window.recaptchaVerifier
       );
-      toast.success("OTP send on your valid phone Number!")
+      toast.success("OTP send on your valid phone Number!");
       setConfirmationResult(result); // Store confirmation result for later use
       setIsCodeSent(true);
       setError(""); // Clear any previous errors
     } catch (err) {
-      setError("Failed to send OTP. Please try again.");
+      console.log("err : ", err);
+      toast.error("Failed to send OTP. Please try again.");
     }
   };
 
@@ -63,7 +66,7 @@ const PhoneAuth = () => {
 
     try {
       const result = await confirmationResult.confirm(otp);
-      toast.success("congratulations!!")
+      toast.success("congratulations!!");
       navigate("/"); // Navigate to another page or update the UI as necessary
     } catch (error) {
       console.error("Error during OTP verification:", error);
@@ -71,12 +74,60 @@ const PhoneAuth = () => {
     }
   };
 
+  // FOr logout---
+  const handleLogout = () => {
+    setUser(null);
+    setIsCodeSent(false);
+    setMynumber("+91");
+    setOtp("");
+    setConfirmationResult(null);
+  };
   return (
     <div className="flex flex-col items-center h-screen justify-center ">
       <div className="bg-white p-5 flex flex-col gap-2 items-center rounded-lg shadow-lg">
         {error && <p className="text-red-500 my-3 text-xs">{error}</p>}
 
-        {isCodeSent ? (
+        {user ? (
+          <UserProfile user={user} onLogout={handleLogout} />
+        ) : (
+          isCodeSent ? (
+            <>
+              <h1>OTP</h1>
+              <input
+                type="text"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="bg-transparent p-2 outline-none xl:bg-transparent xl:p-2 xl:font-mono w-full rounded-md border border-gray-300 mt-3"
+              />
+              <button
+                onClick={verifyOTP}
+                className="bg-zinc-200 p-2 w-32 rounded-sm mt-3"
+              >
+                Verify OTP
+              </button>
+            </>
+          ) : (
+            <>
+              <h1 className="text-lg font-bold mb-4">Login with Phone Number</h1>
+              <input
+                type="tel"
+                placeholder="Enter your phone number"
+                value={mynumber}
+                onChange={(e) => setMynumber(e.target.value)}
+                className="bg-black-600 p-2 outline-none xl:bg-transparent xl:p-2 xl:font-mono w-full rounded-md border border-gray-300"
+              />
+              <div id="recaptcha-container"></div>
+              <button
+                onClick={sendOTP}
+                className="bg-zinc-200 p-2 w-32 rounded-sm"
+              >
+                Send OTP
+              </button>
+            </>
+          )
+        )}
+        {/* {isCodeSent ? (
           <>
             <h1>OTP</h1>
             <input
@@ -105,7 +156,7 @@ const PhoneAuth = () => {
               className="bg-black-600 p-2 outline-none xl:bg-transparent xl:p-2 xl:font-mono w-full rounded-md border border-gray-300"
             />
 
-            <div id="recaptcha-container" className="id"></div>
+            <div id="recaptcha-container"></div>
 
             <button
               onClick={sendOTP}
@@ -114,7 +165,7 @@ const PhoneAuth = () => {
               Send OTP
             </button>
           </>
-        )}
+        )} */}
       </div>
     </div>
   );
