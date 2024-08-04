@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Home from "./components/pages/Home";
 import PhoneAuth from "./components/PhoneAuth";
+import Profile from "./components/Profile";
 import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/PhoneAuth" element={<PhoneAuth />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
 
