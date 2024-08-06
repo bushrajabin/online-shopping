@@ -74,7 +74,7 @@ const PhoneAuth = () => {
     try {
       await confirmationResult.confirm(otp);
       toast.success("Congratulations! You are logged in.");
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       console.error("Error during OTP verification:", error);
       toast.error("Invalid OTP. Please try again.");
@@ -86,7 +86,7 @@ const PhoneAuth = () => {
     try {
       await signInWithPopup(auth, provider);
       toast.success("Login successful!");
-      navigate("/profile");
+      navigate("/");
     } catch (error) {
       console.error("Google login error: ", error);
       toast.error("Failed to login with Google. Please try again.");
