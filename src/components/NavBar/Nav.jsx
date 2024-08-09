@@ -11,7 +11,7 @@ function Nav() {
   };
 
   return (
-    <div className=" bg-white border-b-2  flex flex-row justify-between items-center fixed w-full  sm:flex sm:flex-row sm:items-center   xl:flex xl:flex-row  xl:justify-around xl:items-center xl:bg-gray-50 xl:sticky xl:w-full xl:top-0 xl:border-b-2 ">
+    <div className="  bg-white border-b-2  flex flex-row justify-between items-center fixed w-full sm:bg-red-800  sm:flex sm:flex-row sm:items-center xl:flex xl:flex-row  xl:justify-around xl:items-center xl:bg-gray-50 xl:sticky xl:w-full xl:top-0 xl:border-b-2 ">
       <div className="flex flex-row justify-center items-center xl:flex xl:flex-row sm:flex sm:flex-row sm:items-center md:flex md:flex-row lg:flex lg:flex-row lg:items-center xl:items-center xl:justify-between xl:p-1">
         <img
           src="/logo.png"

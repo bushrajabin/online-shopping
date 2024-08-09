@@ -3,7 +3,7 @@ import Data from "../../Data.json";
 
 function Items() {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true); ///This is for loader
+  // const [loading, setLoading] = useState(true); ///This is for loader
   const [noOfElement, setNoOfElement] = useState(4); ///THis is for products
 
   try {
@@ -11,7 +11,7 @@ function Items() {
       setTimeout(() => {
         setItems(Data);
         setLoading(false);
-      }, 3000);
+      });
     }, [setItems]);
   } catch (error) {
     console.log(error);
@@ -25,22 +25,22 @@ function Items() {
   };
 
   // This is for loader
-  if (loading) {
-    return (
-      <div className="w-full h-screen justify-center m-auto flex flex-col">
-        <img
-          src="./loading.gif"
-          alt=""
-          className=" w-96 h-96 object-cover xl:w-full"
-        />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="w-full h-screen justify-center m-auto flex flex-col">
+  //       <img
+  //         src="./loading.gif"
+  //         alt=""
+  //         className=" w-96 h-96 object-cover xl:w-full"
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
       <div className=" flex flex-col items-center sm:flex sm:flex-col md:flex md:flex-col lg:flex lg:flex-col xl:flex xl:justify-center  ">
-        <div className="   flex flex-row flex-wrap justify-center text-center mt-28 sm:flex sm:flex-row sm:flex-wrap sm:mt-28 xl:flex xl:flex-row  xl:mt-10 ">
+        <div className="   flex flex-row flex-wrap justify-center text-center mt-6 sm:flex sm:flex-row sm:flex-wrap sm:mt-5 xl:flex xl:flex-row  xl:mt-10 ">
           {slice.map((data, index) => {
             const { title, image, price, category, name } = data;
             return (
