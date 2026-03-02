@@ -26,6 +26,16 @@ function App() {
         pauseOnHover
         theme="light"
       />
+      {/*  */}
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }
