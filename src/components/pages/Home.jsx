@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <Nav />
-<Carousel/>
+      <Carousel />
       <Items />
     </>
   );

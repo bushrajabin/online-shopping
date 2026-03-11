@@ -94,8 +94,8 @@ const PhoneAuth = () => {
   };
 
   return (
-    <div className="flex flex-col items-center h-screen justify-center ">
-      <div className="bg-white p-4 flex flex-col gap-2 items-center rounded-lg shadow-lg">
+    <div className="flex flex-col items-center h-screen justify-center  bg-black">
+      <div className="bg-red-900 p-4 flex flex-col gap-2 items-center rounded-lg shadow-lg">
         {error && <p className="text-red-500 m-3 text-xs">{error}</p>}
         {isCodeSent ? (
           <>
